@@ -1,0 +1,2907 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Visão de produto: uma plataforma de engenharia de software assistida por IA, do entendimento do negócio à evolução contínua."
+    />
+    <title>Engenharia de software com IA — Documentação</title>
+    <style>
+      :root {
+        --bg: #f7f7f2;
+        --paper: #fff;
+        --ink: #202a29;
+        --muted: #64716d;
+        --line: #dce2db;
+        --accent: #176a58;
+        --soft: #eaf2ec;
+        --sidebar: #f0f2eb;
+        --quote: #edf4ed;
+        --header: rgba(247, 247, 242, 0.95);
+      }
+      [data-theme="dark"] {
+        --bg: #141b1a;
+        --paper: #1b2523;
+        --ink: #e6ece7;
+        --muted: #a6b8ad;
+        --line: #34423c;
+        --accent: #85d8ba;
+        --soft: #253b32;
+        --sidebar: #18211e;
+        --quote: #24372f;
+        --header: rgba(20, 27, 26, 0.95);
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          16px/1.75 "Segoe UI",
+          Arial,
+          sans-serif;
+      }
+      a {
+        color: var(--accent);
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 4px;
+      }
+      .skip {
+        position: fixed;
+        top: -70px;
+        left: 16px;
+        z-index: 20;
+        background: var(--paper);
+        padding: 10px;
+      }
+      .skip:focus {
+        top: 10px;
+      }
+      .topbar {
+        height: 74px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: var(--header);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 32px;
+        gap: 16px;
+      }
+      .brand {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        color: var(--ink);
+        text-decoration: none;
+        line-height: 1.25;
+      }
+      .brand-mark {
+        width: 35px;
+        height: 35px;
+        display: grid;
+        place-items: center;
+        background: var(--ink);
+        color: var(--bg);
+        border-radius: 8px;
+        font: bold 18px monospace;
+      }
+      .brand strong {
+        display: block;
+        font-size: 14px;
+        letter-spacing: 0.02em;
+      }
+      .brand small {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        background: var(--paper);
+        padding: 7px 13px;
+        border-radius: 7px;
+        font-size: 12px;
+        text-decoration: none;
+      }
+      .btn:hover {
+        background: var(--soft);
+      }
+      .btn.primary {
+        background: var(--accent);
+        color: var(--bg);
+        border-color: var(--accent);
+      }
+      .menu-btn {
+        display: none;
+      }
+      .progress {
+        height: 3px;
+        background: var(--accent);
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 0;
+      }
+      .layout {
+        max-width: 1540px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+      }
+      .sidebar {
+        height: calc(100vh - 74px);
+        position: sticky;
+        top: 74px;
+        overflow: auto;
+        border-right: 1px solid var(--line);
+        padding: 26px 21px 35px;
+        background: var(--sidebar);
+        scrollbar-width: thin;
+      }
+      .sidebar-top {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        margin: 0 8px 18px;
+      }
+      .search-label {
+        font-size: 12px;
+        font-weight: 600;
+        display: block;
+        margin: 0 8px 6px;
+      }
+      .search-wrap {
+        display: flex;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        margin-bottom: 7px;
+        overflow: hidden;
+      }
+      .search-wrap input {
+        padding: 9px 11px;
+        width: 100%;
+        min-width: 0;
+        border: 0;
+        background: transparent;
+        color: var(--ink);
+        font-size: 12px;
+      }
+      .search-wrap button {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font-size: 20px;
+        padding: 0 11px;
+      }
+      .search-status {
+        font-size: 11px;
+        color: var(--muted);
+        margin: 6px 8px 20px;
+        min-height: 20px;
+      }
+      .nav-group {
+        margin: 20px 0;
+      }
+      .nav-group > p {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 0 8px;
+        margin: 0 0 8px;
+      }
+      .nav-group a {
+        display: flex;
+        gap: 9px;
+        padding: 7px 8px;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 5px;
+        border-left: 2px solid transparent;
+      }
+      .nav-group a span {
+        font-family: monospace;
+        font-size: 10px;
+        padding-top: 2px;
+        opacity: 0.7;
+      }
+      .nav-group a:hover {
+        color: var(--ink);
+        background: var(--paper);
+      }
+      .nav-group a.active {
+        background: var(--soft);
+        color: var(--accent);
+        border-left-color: var(--accent);
+        font-weight: 600;
+      }
+      .nav-group a.match {
+        box-shadow: inset -3px 0 var(--accent);
+      }
+      .nav-group a.dim {
+        opacity: 0.33;
+      }
+      .sidebar-note {
+        border-top: 1px solid var(--line);
+        font-size: 11px;
+        color: var(--muted);
+        padding: 18px 8px 0;
+      }
+      main {
+        min-width: 0;
+        padding: 55px clamp(25px, 5vw, 82px) 36px;
+      }
+      .hero {
+        padding-bottom: 44px;
+        border-bottom: 1px solid var(--line);
+      }
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      h1 {
+        font-size: clamp(35px, 4.2vw, 61px);
+        line-height: 1.08;
+        letter-spacing: -0.055em;
+        font-weight: 650;
+        margin: 22px 0;
+        max-width: 780px;
+      }
+      h1 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      .lead {
+        font-size: 18px;
+        line-height: 1.65;
+        color: var(--muted);
+        max-width: 670px;
+        margin: 0;
+      }
+      .meta {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        font: 11px/1.5 monospace;
+        color: var(--muted);
+        margin-top: 25px;
+      }
+      .hero-quote {
+        margin: 32px 0 0;
+        padding: 23px 26px;
+        background: var(--ink);
+        color: var(--bg);
+        border-radius: 10px;
+      }
+      .hero-quote small {
+        display: block;
+        font: 10px monospace;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.65;
+      }
+      .hero-quote p {
+        font-size: 20px;
+        line-height: 1.5;
+        margin: 9px 0 0;
+        letter-spacing: -0.02em;
+      }
+      .overview {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .overview > a {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        text-decoration: none;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      .overview span {
+        font: 11px monospace;
+        color: var(--accent);
+      }
+      .overview strong {
+        display: block;
+        font-size: 13px;
+        margin: 8px 0 4px;
+      }
+      .overview small {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .overview > a:hover {
+        border-color: var(--accent);
+      }
+      .chapter {
+        padding-top: 52px;
+      }
+      .chapter-label {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 22px;
+        position: relative;
+      }
+      .chapter-label > span {
+        font: 10px monospace;
+        letter-spacing: 0.13em;
+        color: var(--accent);
+      }
+      .chapter-label h2 {
+        font-size: 29px;
+        line-height: 1.25;
+        letter-spacing: -0.035em;
+        margin: 8px 0;
+      }
+      .chapter-label p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .doc-section {
+        padding: 37px 0 34px;
+        border-bottom: 1px solid var(--line);
+        scroll-margin-top: 20px;
+      }
+      .section-heading {
+        display: flex;
+        align-items: baseline;
+        gap: 13px;
+        margin-bottom: 21px;
+      }
+      .section-heading > span {
+        font: 11px monospace;
+        color: var(--accent);
+      }
+      .section-heading h3 {
+        font-size: 23px;
+        line-height: 1.35;
+        letter-spacing: -0.025em;
+        margin: 0;
+      }
+      .anchor {
+        margin-left: auto;
+        font-size: 15px;
+        text-decoration: none;
+        opacity: 0.45;
+      }
+      .anchor:hover {
+        opacity: 1;
+      }
+      .prose {
+        max-width: 800px;
+      }
+      .prose p {
+        margin: 0 0 15px;
+      }
+      .prose strong {
+        font-weight: 650;
+      }
+      .prose blockquote {
+        margin: 22px 0;
+        padding: 17px 23px;
+        background: var(--quote);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 7px 7px 0;
+      }
+      .prose blockquote p {
+        margin: 0;
+      }
+      .prose blockquote p + p {
+        margin-top: 9px;
+      }
+      .prose code {
+        font:
+          0.87em "Consolas",
+          monospace;
+        background: var(--soft);
+        padding: 2px 5px;
+        border-radius: 4px;
+        overflow-wrap: anywhere;
+      }
+      .diagram {
+        margin: 24px 0;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        overflow: hidden;
+      }
+      .diagram-title {
+        padding: 13px 18px;
+        border-bottom: 1px solid var(--line);
+        font-size: 12px;
+        font-weight: 650;
+        color: var(--accent);
+      }
+      .tiles {
+        list-style: none;
+        margin: 0;
+        padding: 15px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+      }
+      .tiles li {
+        border: 1px solid var(--line);
+        background: var(--bg);
+        padding: 12px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+      }
+      .tiles li span {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 5px;
+      }
+      .table-wrap {
+        overflow: auto;
+        margin: 25px 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        background: var(--paper);
+        font-size: 13px;
+        text-align: left;
+      }
+      th {
+        background: var(--soft);
+        color: var(--accent);
+        font-size: 11px;
+        letter-spacing: 0.02em;
+      }
+      th,
+      td {
+        padding: 13px 16px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      .steps {
+        counter-reset: step;
+        list-style: none;
+        padding: 18px;
+        margin: 24px 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--paper);
+      }
+      .steps li {
+        counter-increment: step;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        background: var(--soft);
+        border-radius: 5px;
+        font-size: 12px;
+      }
+      .steps li:before {
+        content: counter(step, decimal-leading-zero);
+        color: var(--accent);
+        font: 11px monospace;
+        flex-shrink: 0;
+      }
+      .conversation {
+        margin: 25px 0;
+        border: 1px dashed var(--line);
+        padding: 18px;
+        border-radius: 9px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .conversation p {
+        font-size: 12px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        padding: 7px 12px;
+        border-radius: 9px;
+        margin: 4px 0;
+      }
+      .timeline {
+        list-style: none;
+        border-left: 1px solid var(--accent);
+        margin: 25px 12px;
+        padding: 0 0 0 23px;
+        font-size: 13px;
+      }
+      .timeline li {
+        position: relative;
+        padding: 0 0 16px;
+      }
+      .timeline li:before {
+        content: "";
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        left: -27px;
+        top: 8px;
+      }
+      .scope {
+        border: 1px solid var(--line);
+        padding: 15px 18px;
+        background: var(--paper);
+        border-radius: 7px;
+        margin: 20px 0;
+        font-size: 13px;
+      }
+      .scope span {
+        color: var(--muted);
+        margin: 0 10px;
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        border-top: 1px solid var(--line);
+        padding-top: 24px;
+        margin-top: 40px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      footer a {
+        text-decoration: none;
+      }
+      .print-only {
+        display: none;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (min-width: 1400px) {
+        main {
+          padding-right: 105px;
+        }
+      }
+      @media (max-width: 1050px) {
+        .layout {
+          grid-template-columns: 245px minmax(0, 1fr);
+        }
+        main {
+          padding: 38px 30px;
+        }
+        .sidebar {
+          padding: 23px 14px;
+        }
+        .overview {
+          gap: 8px;
+        }
+        .overview > a {
+          padding: 12px;
+        }
+      }
+      @media (max-width: 760px) {
+        .topbar {
+          height: 65px;
+          padding: 0 15px;
+        }
+        .brand small {
+          display: none;
+        }
+        .brand strong {
+          font-size: 12px;
+        }
+        .brand-mark {
+          width: 30px;
+          height: 30px;
+        }
+        .actions {
+          gap: 5px;
+        }
+        .btn {
+          font-size: 11px;
+          padding: 7px 8px;
+        }
+        .menu-btn {
+          display: inline-flex;
+        }
+        .layout {
+          display: block;
+        }
+        .sidebar {
+          display: none;
+          position: fixed;
+          top: 65px;
+          left: 0;
+          width: min(320px, 90vw);
+          height: calc(100dvh - 65px);
+          z-index: 9;
+          box-shadow: 8px 0 35px #0002;
+        }
+        .sidebar.open {
+          display: block;
+        }
+        main {
+          padding: 32px 20px;
+        }
+        .hero {
+          padding-bottom: 29px;
+        }
+        h1 {
+          font-size: 40px;
+        }
+        .lead {
+          font-size: 16px;
+        }
+        .hero-quote {
+          padding: 20px;
+        }
+        .hero-quote p {
+          font-size: 18px;
+        }
+        .overview {
+          grid-template-columns: 1fr;
+        }
+        .overview > a {
+          display: grid;
+          grid-template-columns: 25px 1fr;
+          gap: 0 8px;
+        }
+        .overview strong {
+          margin: 0;
+        }
+        .overview small {
+          grid-column: 2;
+        }
+        .chapter {
+          padding-top: 40px;
+        }
+        .chapter-label h2 {
+          font-size: 27px;
+        }
+        .section-heading h3 {
+          font-size: 21px;
+        }
+        .prose {
+          font-size: 15px;
+        }
+        .tiles,
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .meta {
+          gap: 10px;
+          font-size: 10px;
+        }
+        th,
+        td {
+          padding: 10px;
+        }
+        .print-text {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      @page {
+        size: A4;
+        margin: 18mm 17mm 20mm;
+      }
+      @media print {
+        html {
+          scroll-behavior: auto;
+          color-scheme: light;
+        }
+        body,
+        [data-theme="dark"] {
+          --bg: #fff;
+          --paper: #fff;
+          --ink: #17221e;
+          --muted: #4b5953;
+          --line: #d1d8d1;
+          --accent: #185b48;
+          --soft: #f1f5f1;
+          --quote: #f1f5f1;
+          background: white;
+          color: var(--ink);
+          font-size: 10pt;
+          line-height: 1.55;
+        }
+        .topbar,
+        .sidebar,
+        .skip,
+        .anchor,
+        .overview,
+        footer a {
+          display: none !important;
+        }
+        .layout {
+          display: block;
+        }
+        main {
+          padding: 0;
+          max-width: none;
+        }
+        .hero {
+          padding: 0 0 8mm;
+        }
+        h1 {
+          font-size: 36pt;
+          max-width: 100%;
+          margin: 6mm 0;
+        }
+        .lead {
+          font-size: 12pt;
+        }
+        .meta {
+          font-size: 8pt;
+        }
+        .hero-quote {
+          background: var(--soft);
+          color: var(--ink);
+          padding: 5mm;
+          border: 1px solid var(--line);
+          margin-top: 7mm;
+        }
+        .hero-quote p {
+          font-size: 13pt;
+        }
+        .hero-quote small {
+          color: var(--accent);
+          opacity: 1;
+        }
+        .chapter {
+          padding: 0;
+          break-before: page;
+        }
+        .chapter-label {
+          padding-bottom: 5mm;
+          margin-bottom: 4mm;
+        }
+        .chapter-label h2 {
+          font-size: 22pt;
+        }
+        .doc-section {
+          padding: 5mm 0;
+        }
+        .section-heading {
+          margin-bottom: 4mm;
+          break-after: avoid;
+        }
+        .section-heading h3 {
+          font-size: 15pt;
+        }
+        .prose {
+          max-width: none;
+        }
+        .prose p {
+          margin-bottom: 3mm;
+          orphans: 3;
+          widows: 3;
+        }
+        .prose blockquote {
+          padding: 4mm 5mm;
+          margin: 4mm 0;
+          break-inside: avoid;
+        }
+        .diagram,
+        .steps,
+        .scope,
+        .table-wrap {
+          break-inside: avoid;
+          margin: 5mm 0;
+        }
+        .tiles li,
+        .steps li,
+        table {
+          font-size: 9pt;
+        }
+        th {
+          font-size: 8pt;
+        }
+        .conversation {
+          break-inside: avoid;
+        }
+        .timeline li {
+          padding-bottom: 3mm;
+        }
+        .print-only {
+          display: block;
+        }
+        footer {
+          margin-top: 8mm;
+          font-size: 8pt;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <header class="topbar">
+      <a class="brand" href="#inicio"
+        ><span class="brand-mark" aria-hidden="true">/e</span
+        ><span
+          ><strong>Engenharia com IA</strong
+          ><small>Documentação de produto</small></span
+        ></a
+      >
+      <div class="actions">
+        <button
+          class="btn menu-btn"
+          id="menu"
+          aria-controls="sidebar"
+          aria-expanded="false"
+        >
+          Sumário</button
+        ><button class="btn" id="theme" aria-label="Ativar tema escuro">
+          Tema escuro</button
+        ><button class="btn primary" id="print">
+          PDF<span class="print-text"> / Imprimir</span>
+        </button>
+      </div>
+      <div class="progress" id="progress" aria-hidden="true"></div>
+    </header>
+    <div class="layout">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+          <span>NESTE DOCUMENTO</span><span>27 SEÇÕES</span>
+        </div>
+        <label class="search-label" for="search">Buscar no documento</label>
+        <div class="search-wrap">
+          <input
+            type="search"
+            id="search"
+            placeholder="Ex.: Git, agentes, segurança"
+            autocomplete="off"
+          /><button id="clear" aria-label="Limpar busca">×</button>
+        </div>
+        <p class="search-status" id="status" role="status">
+          Use o sumário para explorar os temas.
+        </p>
+        <nav aria-label="Sumário">
+          <div class="nav-group">
+            <p>01 / Fundamentos</p>
+            <a href="#sec-0"><span>01</span>Da necessidade ao software</a
+            ><a href="#sec-1"><span>02</span>Ecossistemas e aplicações</a
+            ><a href="#sec-2"><span>03</span>Integração entre aplicações</a
+            ><a href="#sec-3"><span>04</span>Do negócio à engenharia</a>
+          </div>
+          <div class="nav-group">
+            <p>02 / Orquestração de IA</p>
+            <a href="#sec-4"><span>05</span>Contexto delimitado por tarefa</a
+            ><a href="#sec-5"><span>06</span>Coordenação e agentes</a
+            ><a href="#sec-7"><span>07</span>Modelo de uso e eficiência</a
+            ><a href="#sec-18"><span>08</span>Paralelismo entre ecossistemas</a>
+          </div>
+          <div class="nav-group">
+            <p>03 / Engenharia e qualidade</p>
+            <a href="#sec-8"><span>09</span>Um processo de engenharia</a
+            ><a href="#sec-9"><span>10</span>Git e commits atômicos</a
+            ><a href="#sec-21"><span>11</span>Validação independente</a
+            ><a href="#sec-12"><span>12</span>Falhas e retomada</a>
+          </div>
+          <div class="nav-group">
+            <p>04 / Memória e evolução</p>
+            <a href="#sec-6"><span>13</span>Memória além da conversa</a
+            ><a href="#sec-10"><span>14</span>Memória de longo prazo</a
+            ><a href="#sec-11"><span>15</span>Evolução contínua</a
+            ><a href="#sec-19"><span>16</span>Documentação viva</a
+            ><a href="#sec-20"><span>17</span>Conhecimento acumulado</a>
+          </div>
+          <div class="nav-group">
+            <p>05 / Segurança e controle</p>
+            <a href="#sec-13"><span>18</span>Limites de atuação da IA</a
+            ><a href="#sec-14"><span>19</span>Responsabilidades na aplicação</a
+            ><a href="#sec-15"
+              ><span>20</span>Compartilhamento entre aplicações</a
+            ><a href="#sec-16"><span>21</span>Segurança como requisito</a
+            ><a href="#sec-17"><span>22</span>Integridade do projeto</a>
+          </div>
+          <div class="nav-group">
+            <p>06 / Operação e autonomia</p>
+            <a href="#sec-22"><span>23</span>Execução, publicação e operação</a
+            ><a href="#sec-23"
+              ><span>24</span>Acesso e organização dos projetos</a
+            ><a href="#sec-24"><span>25</span>Liberdade de tecnologia</a
+            ><a href="#sec-25"
+              ><span>26</span>Software convencional e autonomia</a
+            ><a href="#sec-26"><span>27</span>A proposta em perspectiva</a>
+          </div>
+        </nav>
+        <p class="sidebar-note">
+          Da necessidade de negócio à evolução contínua do software.
+        </p>
+      </aside>
+      <main id="conteudo">
+        <div class="hero" id="inicio">
+          <div class="eyebrow">
+            <span class="dot"></span>Visão de produto / Documento conceitual
+          </div>
+          <h1>
+            Do negócio ao software.<br /><em>Com engenharia no controle.</em>
+          </h1>
+          <p class="lead">
+            Uma plataforma para transformar necessidades de negócio em produtos
+            de software.
+          </p>
+          <div class="overview">
+            <a href="#chapter-0"
+              ><span>01</span><strong>Entender e organizar</strong
+              ><small>Negócio, ecossistemas e aplicações.</small></a
+            ><a href="#chapter-2"
+              ><span>02</span><strong>Construir e validar</strong
+              ><small>Agentes, testes e versionamento.</small></a
+            ><a href="#chapter-5"
+              ><span>03</span><strong>Operar e evoluir</strong
+              ><small>Publicação e continuidade.</small></a
+            >
+          </div>
+        </div>
+        <div class="chapter" id="chapter-0">
+          <div class="chapter-label">
+            <span>PARTE 01</span>
+            <h2>Fundamentos</h2>
+            <p>O produto e sua organização</p>
+          </div>
+          <section class="doc-section" id="sec-0" aria-labelledby="title-0">
+            <header class="section-heading">
+              <span>01</span>
+              <h3 id="title-0">Da necessidade ao software</h3>
+              <a
+                class="anchor"
+                href="#sec-0"
+                aria-label="Link para Da necessidade ao software"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Hoje uma inteligência artificial já consegue escrever bastante
+                código, mas construir software vai muito além disso. Um sistema
+                pronto para uso precisa nascer organizado, seguir padrões de
+                mercado, possuir testes, documentação e versionamento, além de
+                ser atualizável, seguro e capaz de integrar-se a outros sistemas
+                e ser publicado de forma previsível.
+              </p>
+              <p>
+                A plataforma nasce justamente para reunir essas partes em um
+                único processo.
+              </p>
+              <p>A proposta não é simplesmente pedir:</p>
+              <blockquote>
+                <p>“Faça um sistema para mim.”</p>
+              </blockquote>
+              <p>e receber uma pasta cheia de arquivos.</p>
+              <p>A ideia é poder dizer:</p>
+              <blockquote>
+                <p>
+                  <strong
+                    >“Preciso de um sistema para controlar o estoque da minha
+                    farmácia.”</strong
+                  >
+                </p>
+              </blockquote>
+              <p>
+                e deixar que a plataforma transforme essa necessidade em um
+                produto técnico estruturado.
+              </p>
+              <p>
+                Na prática, a plataforma traz a engenharia de software para
+                dentro da geração por IA, indo muito além de um simples chat.
+                Ela assume o ciclo completo: entende o problema, divide o
+                trabalho, utiliza a IA na implementação e cuida de tudo o que
+                vem depois, como testes, documentação, controle de qualidade,
+                versionamento com Git, integrações, segurança e execução em
+                ambiente de produção.
+              </p>
+              <p>
+                E por trás disso existe uma decisão econômica fundamental: a IA
+                será utilizada através de um <strong>plano fixo</strong>, a
+                exemplo do Codex autenticado pela
+                <strong>assinatura do ChatGPT</strong>, em vez de uma
+                arquitetura baseada em cobrança variável de API por tokens.
+              </p>
+              <p>
+                O resultado pretendido é uma espécie de
+                <strong
+                  >ambiente de produção de software assistido por IA</strong
+                >, mas com muito mais controle e recursos do que simplesmente
+                abrir um chat e pedir código.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-1" aria-labelledby="title-1">
+            <header class="section-heading">
+              <span>02</span>
+              <h3 id="title-1">Ecossistema e Componente</h3>
+              <a
+                class="anchor"
+                href="#sec-1"
+                aria-label="Link para Ecossistemas e aplicações"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                A organização começa por dois conceitos bastante simples:
+                <strong>Ecossistema</strong> e <strong>Componente</strong>.
+              </p>
+              <p>Imagine a <em>Farmácia Lima</em>.</p>
+              <p>
+                Ela provavelmente não teria apenas um programa. Ao longo do
+                tempo poderia precisar de:
+              </p>
+              <div class="diagram">
+                <div class="diagram-title">Ecossistema · Farmácia Lima</div>
+                <ul class="tiles">
+                  <li>Site</li>
+                  <li>Aplicativo do cliente</li>
+                  <li>Sistema de Balcão</li>
+                  <li>Controle de Estoque</li>
+                  <li>Sistema Financeiro</li>
+                  <li>Gestão de Funcionários</li>
+                  <li>Sistema de Entregas</li>
+                  <li>Integração com Fornecedores</li>
+                </ul>
+              </div>
+
+              <p>
+                Tudo isso pertence ao mesmo negócio. Portanto, dentro da
+                plataforma, tudo pode ficar sob o mesmo
+                <strong>ecossistema</strong> Farmácia Lima.
+              </p>
+              <p>
+                Cada software completo dentro desse
+                <strong>ecossistema</strong> é um <strong>componente</strong>,
+                (como o Sistema de Balcão, por exemplo).
+              </p>
+              <p>
+                Um <strong>componente</strong> representa uma unidade de
+                software que realmente faz sentido existir de forma
+                independente. Ele possui seu próprio código, seu próprio Git,
+                seus próprios testes, documentação, versões e ciclo de
+                desenvolvimento.
+              </p>
+              <p>
+                Isso não significa que cada tecnologia utilizada vira um
+                <strong>componente</strong> diferente.
+              </p>
+              <p>
+                Por exemplo, o <code>Controle de Estoque</code> poderia
+                perfeitamente possuir:
+              </p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Componente</th>
+                      <th scope="col">Camada</th>
+                      <th scope="col">Tecnologia</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Controle de Estoque</td>
+                      <td>Frontend</td>
+                      <td>React + TypeScript</td>
+                    </tr>
+                    <tr>
+                      <td>Controle de Estoque</td>
+                      <td>Backend</td>
+                      <td>Java + Spring Boot</td>
+                    </tr>
+                    <tr>
+                      <td>Controle de Estoque</td>
+                      <td>Banco</td>
+                      <td>PostgreSQL</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>
+                e continuar sendo <strong>um único componente</strong>, porque
+                tudo aquilo forma um único produto.
+              </p>
+              <p>
+                A separação acontece quando realmente existem softwares
+                diferentes.
+              </p>
+              <p>
+                Isso traz uma vantagem importante: a plataforma consegue manter
+                cada produto independente sem perder o contexto de que todos
+                pertencem ao mesmo negócio.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-2" aria-labelledby="title-2">
+            <header class="section-heading">
+              <span>03</span>
+              <h3 id="title-2">Integração entre componentes</h3>
+              <a
+                class="anchor"
+                href="#sec-2"
+                aria-label="Link para Integração entre aplicações"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                O conceito de <strong>ecossistema</strong> ganha ainda mais
+                valor quando essas aplicações precisam conversar.
+              </p>
+              <p>
+                Imagine que o <code>Sistema de Balcão</code> faça uma venda.
+              </p>
+              <p>
+                Ele pode precisar avisar o <code>Controle de Estoque</code>:
+              </p>
+              <blockquote>
+                <p>“Foram vendidas duas unidades deste medicamento.”</p>
+              </blockquote>
+              <p>O <code>Controle de Estoque</code> atualiza a quantidade.</p>
+              <p>
+                O <code>Aplicativo do Cliente</code> consulta o mesmo estoque
+                para mostrar disponibilidade.
+              </p>
+              <p>
+                O <code>Sistema Financeiro</code> recebe informações da venda.
+              </p>
+              <p>
+                O <code>Sistema de Entregas</code> recebe os pedidos que
+                precisam sair da loja.
+              </p>
+              <p>
+                A plataforma conhece esses componentes como partes do mesmo
+                ecossistema e pode organizar os contratos e informações
+                compartilhadas entre elas.
+              </p>
+              <p>
+                Durante o desenvolvimento, um componente também pode precisar
+                que outro componente esteja funcionando para conseguir testá-lo
+                ou consumir sua API. A arquitetura permite coordenar essas
+                dependências, inclusive iniciando os componentes necessários
+                quando um cenário de desenvolvimento exigir essa comunicação.
+              </p>
+              <p>
+                Isso abre espaço para construir não apenas programas isolados,
+                mas <strong>ecossistemas inteiros de software</strong>.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-3" aria-labelledby="title-3">
+            <header class="section-heading">
+              <span>04</span>
+              <h3 id="title-3">Do negócio à engenharia</h3>
+              <a
+                class="anchor"
+                href="#sec-3"
+                aria-label="Link para Do negócio à engenharia"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>Esse é um dos maiores valores do produto.</p>
+              <p>
+                A pessoa não deveria precisar conhecer a tecnologia necessária
+                para conseguir explicar o que precisa.
+              </p>
+              <p>Ela poderia dizer:</p>
+              <blockquote>
+                <p>
+                  “Quero um sistema para controlar o estoque da minha farmácia.”
+                </p>
+              </blockquote>
+              <p>
+                A plataforma pode transformar uma frase relativamente simples em
+                perguntas e decisões muito mais concretas.
+              </p>
+              <p>
+                Por exemplo, ela pode perceber que um estoque farmacêutico
+                provavelmente precisa tratar:
+              </p>
+              <div class="diagram">
+                <div class="diagram-title">Domínio · Estoque farmacêutico</div>
+                <ul class="tiles">
+                  <li>Produtos</li>
+                  <li>Entradas</li>
+                  <li>Saídas</li>
+                  <li>Quantidade disponível</li>
+                  <li>Fornecedores</li>
+                  <li>Lotes</li>
+                  <li>Datas de validade</li>
+                  <li>Perdas</li>
+                  <li>Ajustes</li>
+                  <li>Estoque mínimo</li>
+                  <li>Movimentações</li>
+                  <li>Relatórios</li>
+                </ul>
+              </div>
+
+              <p>Depois pode surgir outra necessidade:</p>
+              <blockquote>
+                <p>
+                  “Quero ser avisado quando um medicamento estiver perto de
+                  vencer.”
+                </p>
+              </blockquote>
+              <p>
+                Isso pode ser convertido tecnicamente em regras de negócio,
+                armazenamento das datas de validade, consultas, alertas,
+                interface, testes e documentação.
+              </p>
+              <p>Ou:</p>
+              <blockquote>
+                <p>
+                  “Quero que uma venda no balcão retire automaticamente os
+                  produtos do estoque.”
+                </p>
+              </blockquote>
+              <p>
+                A plataforma identifica que agora existe uma integração entre
+                duas aplicações do ecossistema.
+              </p>
+              <p>O objetivo é criar uma camada de tradução:</p>
+              <ol class="steps">
+                <li>Necessidade do negócio</li>
+                <li>Regras e funcionalidades</li>
+                <li>Arquitetura</li>
+                <li>Implementação</li>
+                <li>Testes</li>
+                <li>Software funcionando</li>
+              </ol>
+
+              <p>
+                A pessoa continua pensando em
+                <strong
+                  >Farmácia, estoque, vendas, clientes e funcionários</strong
+                >.
+              </p>
+              <p>
+                A plataforma se responsabiliza por transformar isso em banco de
+                dados, APIs, interfaces, código, testes, versionamento e
+                documentação.
+              </p>
+            </div>
+          </section>
+        </div>
+        <div class="chapter" id="chapter-1">
+          <div class="chapter-label">
+            <span>PARTE 02</span>
+            <h2>Orquestração de IA</h2>
+            <p>Agentes, contexto e uso</p>
+          </div>
+          <section class="doc-section" id="sec-4" aria-labelledby="title-4">
+            <header class="section-heading">
+              <span>05</span>
+              <h3 id="title-4">Contexto delimitado por tarefa</h3>
+              <a
+                class="anchor"
+                href="#sec-4"
+                aria-label="Link para Contexto delimitado por tarefa"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>Essa é uma das diferenças mais importantes.</p>
+              <p>
+                Em uma utilização comum de IA para programação, uma conversa
+                tende a crescer assim:
+              </p>
+              <div class="conversation">
+                <p>Faça o estoque.</p>
+                <p>Agora altere isso.</p>
+                <p>Leia aquele arquivo.</p>
+                <p>Veja o frontend.</p>
+                <p>Corrija o backend.</p>
+                <p>Lembre do que fizemos ontem.</p>
+                <p>Agora faça os testes.</p>
+                <p>Não esqueça aquela decisão de vinte mensagens atrás.</p>
+              </div>
+
+              <p>Quanto maior fica o software, maior fica o problema.</p>
+              <p>
+                Em uma API tradicional, contexto significa
+                <strong>tokens</strong>, e tokens significam <strong>custo financeiro</strong>.
+                Mesmo utilizando um plano, contexto excessivo continua
+                significando consumo desnecessário da franquia disponível e
+                maior tempo de processamento.
+              </p>
+              <p>
+                Mas existe um problema ainda maior que o custo:
+                <strong>qualidade</strong>.
+              </p>
+              <p>
+                Se uma IA precisa receber centenas de arquivos e uma conversa
+                enorme para alterar uma pequena funcionalidade, muita informação
+                irrelevante começa a competir pela atenção dela.
+              </p>
+              <p>A plataforma faz o contrário.</p>
+              <p>
+                Imagine novamente o
+                <code>Componente Controle de Estoque da Farmácia Lima</code>.
+              </p>
+              <p>Se a tarefa atual for:</p>
+              <blockquote>
+                <p>“Implementar o cadastro de fornecedores.”</p>
+              </blockquote>
+              <p>
+                a IA responsável por aquilo não precisa receber toda a história
+                do aplicativo do cliente, do financeiro, das entregas e todas as
+                decisões tomadas durante meses de desenvolvimento.
+              </p>
+              <p>
+                Ela recebe principalmente aquilo que é necessário para fazer
+                <strong>aquela tarefa corretamente</strong>.
+              </p>
+              <p>
+                Isso reduz releitura, economiza contexto e deixa o problema que
+                a IA precisa resolver muito mais delimitado.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-5" aria-labelledby="title-5">
+            <header class="section-heading">
+              <span>06</span>
+              <h3 id="title-5">Coordenação e agentes</h3>
+              <a
+                class="anchor"
+                href="#sec-5"
+                aria-label="Link para Coordenação e agentes"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Uma forma simples de imaginar a arquitetura da plataforma é pensar em alguém
+                utilizando várias conversas de IA de maneira organizada.
+              </p>
+              <p>Existe uma sessão principal funcionando como coordenadora.</p>
+              <p>
+                Ela não precisa escrever pessoalmente cada pedaço do sistema.
+                Ela sabe o objetivo, conhece o estado atual do projeto e cria
+                outras sessões de IA para executar trabalhos específicos.
+              </p>
+              <p>Essas sessões são os agentes.</p>
+              <p>
+                É quase como se um desenvolvedor experiente estivesse utilizando
+                vários chats:
+              </p>
+              <ol class="steps">
+                <li>Usuário</li>
+                <li>IA coordenadora</li>
+                <li>Plano de desenvolvimento</li>
+                <li>Agente responsável por uma tarefa</li>
+                <li>Implementação</li>
+                <li>Validação</li>
+                <li>Registro da mudança</li>
+                <li>Próxima tarefa</li>
+              </ol>
+
+              <p>
+                Mas existe uma diferença fundamental: isso não depende de uma
+                pessoa manualmente abrir várias janelas, copiar contexto e
+                lembrar quem estava fazendo o quê.
+              </p>
+              <p>
+                <strong>A própria plataforma controla essas sessões.</strong>
+              </p>
+              <p>
+                No exemplo da Farmácia Lima, um agente poderia trabalhar na
+                estrutura do estoque. Depois outro poderia implementar
+                determinada parte do backend. Outro momento pode ser dedicado ao
+                frontend. Outro contexto pode ficar responsável por testes e
+                validação.
+              </p>
+              <p>
+                Mas eles
+                <strong
+                  >não ficam alterando o mesmo componente simultaneamente</strong
+                >.
+              </p>
+              <p>
+                Dentro de uma Aplicação, o desenvolvimento segue uma linha
+                controlada.
+              </p>
+              <p>
+                Um termina sua responsabilidade, o resultado é verificado e
+                registrado, e somente então o próximo trabalho avança.
+              </p>
+              <p>
+                Isso evita várias IAs disputando os mesmos arquivos, commits se
+                misturando, um agente sobrescrevendo decisões de outro e testes
+                sendo feitos sobre código que ainda está mudando.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-7" aria-labelledby="title-7">
+            <header class="section-heading">
+              <span>07</span>
+              <h3 id="title-7">Modelo de uso e eficiência</h3>
+              <a
+                class="anchor"
+                href="#sec-7"
+                aria-label="Link para Modelo de uso e eficiência"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>A economia acontece em duas camadas diferentes.</p>
+              <p>
+                Na primeira, em vez de montar todo o produto em cima de uma API
+                cuja conta cresce conforme milhões de tokens são consumidos, a
+                plataforma utiliza sessões do Codex vinculadas ao plano do
+                ChatGPT.
+              </p>
+              <p>Então o funcionamento se aproxima muito mais de:</p>
+              <blockquote>
+                <p>
+                  “um software utilizando de forma automatizada as mesmas
+                  sessões de IA que uma pessoa utilizaria”
+                </p>
+              </blockquote>
+              <p>do que de:</p>
+              <blockquote>
+                <p>
+                  “um sistema enviando cada palavra para uma API e recebendo uma
+                  nova cobrança por token.”
+                </p>
+              </blockquote>
+              <p>
+                Naturalmente continuam existindo os limites de utilização do
+                plano, mas o modelo econômico é bastante diferente da cobrança
+                variável de API.
+              </p>
+              <p>A segunda economia vem do próprio desenho do sistema.</p>
+              <p>
+                Os agentes, isto é, os chats especializados criados e
+                controlados pelo coordenador.
+              </p>
+              <p>
+                No exemplo da Farmácia Lima, o chat que está desenvolvendo a validação
+                de um lote não precisa reler todo o aplicativo, todo o
+                ecossistema e todo o histórico para descobrir o que deve fazer.
+              </p>
+              <p>
+                Menos contexto desnecessário significa menos consumo e, ao mesmo
+                tempo, <strong>menos distração para o modelo</strong>.
+              </p>
+              <p>
+                A mesma arquitetura que reduz tokens também tende a melhorar os
+                resultados.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-18" aria-labelledby="title-18">
+            <header class="section-heading">
+              <span>08</span>
+              <h3 id="title-18">Paralelismo entre ecossistemas</h3>
+              <a
+                class="anchor"
+                href="#sec-18"
+                aria-label="Link para Paralelismo entre ecossistemas"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                A plataforma também não foi pensada para possuir apenas um
+                cliente ou um projeto aberto.
+              </p>
+              <p>No mesmo ambiente poderiam existir:</p>
+              <div class="diagram">
+                <div class="diagram-title">Ecossistemas independentes</div>
+                <ul class="tiles">
+                  <li>Farmácia Lima</li>
+                  <li>Clínica Oliveira</li>
+                  <li>Restaurante Central</li>
+                  <li>Sistema interno da empresa</li>
+                  <li>Aplicação pessoal</li>
+                  <li>Projeto de outro cliente</li>
+                </ul>
+              </div>
+
+              <p>
+                Uma forma simples de imaginar isso é através da ideia de
+                <strong>classe e objeto</strong>.
+              </p>
+              <p>
+                Existe o mecanismo do Orquestrador, como uma definição de como
+                trabalhar.
+              </p>
+              <p>
+                Quando determinado componente precisa ser desenvolvido, pode
+                existir uma instância desse mecanismo trabalhando
+                especificamente naquele contexto.
+              </p>
+              <p>Então podemos ter algo conceitualmente parecido com:</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Orquestrador</th>
+                      <th scope="col">Ecossistema</th>
+                      <th scope="col">Componente</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Instância A</td>
+                      <td>Farmácia Lima</td>
+                      <td>Controle de Estoque</td>
+                    </tr>
+                    <tr>
+                      <td>Instância B</td>
+                      <td>Clínica Oliveira</td>
+                      <td>Sistema de Agendamentos</td>
+                    </tr>
+                    <tr>
+                      <td>Instância C</td>
+                      <td>Restaurante Central</td>
+                      <td>Sistema de Pedidos</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>
+                São instâncias da mesma inteligência de coordenação, mas com
+                estados, contextos e componentes diferentes.
+              </p>
+              <p>
+                Isso permite que ecossistemas independentes avancem em paralelo
+                quando houver recursos disponíveis.
+              </p>
+              <p>
+                A regra muda dentro de um mesmo componente: ali o trabalho
+                continua sequencial, justamente para preservar consistência,
+                commits, testes e segurança.
+              </p>
+              <p>
+                Então temos
+                <strong
+                  >paralelismo onde ele é seguro e útil, e sequência onde
+                  concorrência poderia causar bagunça</strong
+                >.
+              </p>
+            </div>
+          </section>
+        </div>
+        <div class="chapter" id="chapter-2">
+          <div class="chapter-label">
+            <span>PARTE 03</span>
+            <h2>Engenharia e qualidade</h2>
+            <p>Processo, Git e validação</p>
+          </div>
+          <section class="doc-section" id="sec-8" aria-labelledby="title-8">
+            <header class="section-heading">
+              <span>09</span>
+              <h3 id="title-8">Um processo de engenharia</h3>
+              <a
+                class="anchor"
+                href="#sec-8"
+                aria-label="Link para Um processo de engenharia"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                A plataforma não trata a resposta da IA como produto pronto.
+              </p>
+              <p>Uma mudança precisa atravessar um processo.</p>
+              <p>De maneira simplificada:</p>
+              <ol class="steps">
+                <li>Entender</li>
+                <li>Planejar</li>
+                <li>Implementar</li>
+                <li>Testar</li>
+                <li>Validar</li>
+                <li>Documentar</li>
+                <li>Versionar</li>
+                <li>Avançar</li>
+              </ol>
+
+              <p>Tudo isso é organizado pela própria plataforma.</p>
+              <p>
+                O usuário não precisa ficar administrando manualmente qual
+                agente deve rodar primeiro, quando os testes devem começar ou em
+                que momento uma mudança pode ser registrada.
+              </p>
+              <p>
+                Esse controle é importante porque aproxima o software gerado do
+                que se espera em projetos profissionais.
+              </p>
+              <p>
+                A plataforma não tenta inventar uma maneira completamente
+                diferente de desenvolver software só porque existe IA envolvida.
+              </p>
+              <p>
+                Ela aproveita práticas que o mercado já utiliza há muito tempo:
+                Git, testes, documentação, separação de responsabilidades,
+                ambientes, contratos, validação, histórico, versionamento e
+                recuperação de falhas.
+              </p>
+              <p>
+                A IA entra <strong>dentro da engenharia</strong>, e não no lugar
+                dela.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-9" aria-labelledby="title-9">
+            <header class="section-heading">
+              <span>10</span>
+              <h3 id="title-9">Git e commits atômicos</h3>
+              <a
+                class="anchor"
+                href="#sec-9"
+                aria-label="Link para Git e commits atômicos"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Como cada mudança é controlada separadamente, o Git pode
+                registrar a evolução do software de maneira muito mais
+                organizada.
+              </p>
+              <p>
+                Imagine que o <code>Controle de Estoque</code> evolua assim:
+              </p>
+              <ol class="timeline">
+                <li>Cria estrutura inicial do estoque</li>
+                <li>Implementa cadastro de produtos</li>
+                <li>Adiciona fornecedores</li>
+                <li>Implementa movimentações de entrada e saída</li>
+                <li>Adiciona controle de lotes</li>
+                <li>Adiciona controle de validade</li>
+                <li>Cria alerta de estoque mínimo</li>
+              </ol>
+
+              <p>
+                A ideia é que essas mudanças não sejam misturadas em um único
+                registro gigantesco.
+              </p>
+              <p>
+                Cada unidade de desenvolvimento atravessa seus testes e
+                validações antes de ser oficialmente incorporada.
+              </p>
+              <p>
+                Isso permite criar <strong>commits atômicos</strong>: cada
+                commit representa uma mudança lógica compreensível.
+              </p>
+              <p>
+                Se alguma coisa der errado mais tarde, fica muito mais fácil
+                descobrir:
+              </p>
+              <blockquote>
+                <p>quando determinada funcionalidade entrou;</p>
+              </blockquote>
+              <blockquote>
+                <p>o que mudou junto com ela;</p>
+              </blockquote>
+              <blockquote>
+                <p>quais arquivos foram envolvidos;</p>
+              </blockquote>
+              <blockquote>
+                <p>quais testes existiam;</p>
+              </blockquote>
+              <blockquote>
+                <p>qual era o estado do sistema naquele momento.</p>
+              </blockquote>
+              <p>
+                O Git deixa de ser apenas um local onde o código é salvo e passa
+                a fazer parte da organização interna da plataforma.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-21" aria-labelledby="title-21">
+            <header class="section-heading">
+              <span>11</span>
+              <h3 id="title-21">Validação independente</h3>
+              <a
+                class="anchor"
+                href="#sec-21"
+                aria-label="Link para Validação independente"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Esse controle também faz parte da segurança geral da plataforma.
+              </p>
+              <p>Não basta um agente terminar e declarar:</p>
+              <blockquote>
+                <p>“Funcionou.”</p>
+              </blockquote>
+              <p>
+                A conclusão de uma tarefa depende de verificações controladas
+                pela aplicação.
+              </p>
+              <p>
+                Os testes, critérios de aceitação, alterações realizadas e
+                estado do Git fazem parte dessa verificação.
+              </p>
+              <p>
+                E existe uma separação importante:
+                <strong
+                  >o agente que produz o código não possui liberdade absoluta
+                  para redefinir os critérios pelos quais seu próprio trabalho
+                  será aprovado.</strong
+                >
+              </p>
+              <p>
+                A plataforma conhece os mecanismos de validação aceitos para
+                aquele tipo de projeto e controla essa etapa.
+              </p>
+              <p>Na prática, isso funciona como uma separação entre:</p>
+              <div class="diagram">
+                <div class="diagram-title">Separação de responsabilidades</div>
+                <ul class="tiles">
+                  <li>Quem produz</li>
+                  <li>Quem verifica</li>
+                </ul>
+              </div>
+
+              <p>
+                sem exigir que o usuário administre essa divisão manualmente.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-12" aria-labelledby="title-12">
+            <header class="section-heading">
+              <span>12</span>
+              <h3 id="title-12">Falhas e retomada</h3>
+              <a
+                class="anchor"
+                href="#sec-12"
+                aria-label="Link para Falhas e retomada"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>Falhas fazem parte de desenvolvimento de software.</p>
+              <p>Uma IA pode ser interrompida.</p>
+              <p>Um teste pode falhar.</p>
+              <p>
+                O código pode ter sido produzido corretamente, mas uma validação
+                posterior pode reprovar.
+              </p>
+              <p>Uma aplicação pode ter mudado desde a última tentativa.</p>
+              <p>
+                A plataforma registra essas diferenças para não transformar todo
+                erro em:
+              </p>
+              <blockquote>
+                <p>“Faça tudo novamente.”</p>
+              </blockquote>
+              <p>
+                Imagine que um agente tenha passado sete minutos implementando
+                uma funcionalidade da Farmácia Lima e o código esteja pronto,
+                mas um teste falhe na etapa seguinte.
+              </p>
+              <p>
+                Se existe evidência suficiente de que a implementação continua
+                intacta, não faz sentido gastar outra sessão de IA para escrever
+                tudo novamente.
+              </p>
+              <p>
+                A plataforma pode preservar o trabalho já produzido, identificar
+                onde houve a falha e retomar a partir da etapa apropriada.
+              </p>
+              <p>Isso acontece internamente.</p>
+              <p>O usuário não precisa decidir:</p>
+              <blockquote>
+                <p>
+                  “Eu devo criar outro agente ou repetir somente a validação?”
+                </p>
+              </blockquote>
+              <p>Essa é responsabilidade da própria plataforma.</p>
+              <p>
+                Esse tipo de recuperação reduz retrabalho, economiza uso de IA e
+                também torna o processo mais confiável.
+              </p>
+            </div>
+          </section>
+        </div>
+        <div class="chapter" id="chapter-3">
+          <div class="chapter-label">
+            <span>PARTE 04</span>
+            <h2>Memória e evolução</h2>
+            <p>Continuidade do conhecimento</p>
+          </div>
+          <section class="doc-section" id="sec-6" aria-labelledby="title-6">
+            <header class="section-heading">
+              <span>13</span>
+              <h3 id="title-6">Memória além da conversa</h3>
+              <a
+                class="anchor"
+                href="#sec-6"
+                aria-label="Link para Memória além da conversa"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>Essa é outra característica essencial.</p>
+              <p>
+                A intenção não é manter uma conversa gigantesca aberta para
+                sempre só porque ela contém informações importantes.
+              </p>
+              <p>
+                Quando um agente termina, o contexto temporário daquela conversa
+                pode ser descartado.
+              </p>
+              <p>
+                O conhecimento importante fica armazenado de maneiras muito mais
+                confiáveis.
+              </p>
+              <p>Parte dele fica no próprio código.</p>
+              <p>Parte fica no Git.</p>
+              <p>Parte fica na documentação.</p>
+              <p>Parte fica nos testes.</p>
+              <p>
+                Parte fica no planejamento mantido pela plataforma, que registra
+                o que precisa ser feito e o que já foi realizado.
+              </p>
+              <p>
+                Parte fica nos registros de execução, que permitem saber em que
+                estágio determinado trabalho terminou ou falhou.
+              </p>
+              <p>
+                E parte fica nos contratos do projeto, que registram regras que
+                outras partes precisam respeitar.
+              </p>
+              <p>Então podemos pensar assim:</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Memória</th>
+                      <th scope="col">Onde o conhecimento fica</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Curta</td>
+                      <td>Contexto do agente que está trabalhando agora.</td>
+                    </tr>
+                    <tr>
+                      <td>Longa</td>
+                      <td>
+                        Git, código, documentação, testes, planejamento,
+                        decisões e estado do desenvolvimento.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>
+                Em vez de depender de uma IA “lembrar de uma conversa antiga”, o
+                próprio projeto carrega o conhecimento necessário para
+                continuar.
+              </p>
+              <p>
+                Fechar um agente deixa de significar apagar a memória do
+                desenvolvimento.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-10" aria-labelledby="title-10">
+            <header class="section-heading">
+              <span>14</span>
+              <h3 id="title-10">Memória de longo prazo</h3>
+              <a
+                class="anchor"
+                href="#sec-10"
+                aria-label="Link para Memória de longo prazo"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Essa ideia se conecta diretamente com o funcionamento dos
+                agentes.
+              </p>
+              <p>Uma conversa de IA é temporária.</p>
+              <p>O histórico Git não é.</p>
+              <p>
+                Se um agente implementou o controle de fornecedores e aquela
+                mudança foi validada e registrada, uma IA futura não precisa
+                receber todo o diálogo daquele agente para saber que o recurso
+                existe.
+              </p>
+              <p>
+                Ela pode trabalhar a partir do estado consolidado do software e
+                das informações que a plataforma preservou.
+              </p>
+              <p>A plataforma combina várias formas de memória.</p>
+              <p>O Git conta <strong>como o software evoluiu</strong>.</p>
+              <p>
+                A documentação explica
+                <strong
+                  >como ele funciona e por que certas decisões existem</strong
+                >.
+              </p>
+              <p>
+                Os testes mostram
+                <strong
+                  >quais comportamentos precisam continuar funcionando</strong
+                >.
+              </p>
+              <p>
+                O planejamento registra
+                <strong
+                  >o que já foi desenvolvido e o que ainda precisa ser
+                  feito</strong
+                >.
+              </p>
+              <p>
+                Os contratos registram
+                <strong
+                  >como diferentes partes devem conversar sem quebrar umas às
+                  outras</strong
+                >.
+              </p>
+              <p>
+                E os estados persistidos permitem saber
+                <strong
+                  >onde uma execução parou e se ela pode continuar com
+                  segurança</strong
+                >.
+              </p>
+              <p>
+                Juntas, essas informações permitem que uma nova sessão de IA
+                continue o trabalho sem depender da conversa que existia meses
+                atrás.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-11" aria-labelledby="title-11">
+            <header class="section-heading">
+              <span>15</span>
+              <h3 id="title-11">Evolução contínua</h3>
+              <a
+                class="anchor"
+                href="#sec-11"
+                aria-label="Link para Evolução contínua"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>Esse é um dos maiores valores do modelo.</p>
+              <p>
+                Uma aplicação criada dentro da plataforma não é tratada como um
+                artefato descartável.
+              </p>
+              <p>Voltando ao exemplo da Farmácia Lima.</p>
+              <p>
+                Na primeira versão do <code>Controle de Estoque</code>, talvez
+                exista apenas:
+              </p>
+              <blockquote>
+                <p>produtos, quantidade e entradas e saídas.</p>
+              </blockquote>
+              <p>
+                Depois a própria <strong>mesma aplicação</strong> pode receber:
+              </p>
+              <blockquote>
+                <p>fornecedores.</p>
+              </blockquote>
+              <p>Depois:</p>
+              <blockquote>
+                <p>lotes.</p>
+              </blockquote>
+              <p>Depois:</p>
+              <blockquote>
+                <p>validade.</p>
+              </blockquote>
+              <p>Depois:</p>
+              <blockquote>
+                <p>alertas de estoque mínimo.</p>
+              </blockquote>
+              <p>Depois:</p>
+              <blockquote>
+                <p>relatórios.</p>
+              </blockquote>
+              <p>Depois:</p>
+              <blockquote>
+                <p>integração com vendas.</p>
+              </blockquote>
+              <p>Depois:</p>
+              <blockquote>
+                <p>integração com entregas.</p>
+              </blockquote>
+              <p>
+                Não é necessário gerar um novo Controle de Estoque toda vez.
+              </p>
+              <p>
+                O mesmo Component pode passar por quantos ciclos de evolução
+                forem necessários, mantendo seu histórico, testes, documentação
+                e contexto técnico.
+              </p>
+              <p>
+                Ao mesmo tempo, quando surgir uma necessidade que realmente
+                representa outro software, pode nascer outra aplicação dentro do
+                mesmo ecossistema.
+              </p>
+              <p>Por exemplo:</p>
+              <div class="diagram">
+                <div class="diagram-title">Farmácia Lima</div>
+                <ul class="tiles">
+                  <li>
+                    <strong>Controle de Estoque</strong
+                    ><span>Evolui continuamente</span>
+                  </li>
+                  <li>
+                    <strong>Sistema de Balcão</strong
+                    ><span>Evolui continuamente</span>
+                  </li>
+                  <li>
+                    <strong>Aplicativo do Cliente</strong
+                    ><span>Evolui continuamente</span>
+                  </li>
+                </ul>
+              </div>
+
+              <p>
+                Assim, tanto uma aplicação individual quanto o ecossistema
+                inteiro podem crescer ao longo do tempo.
+              </p>
+              <p>
+                A plataforma conhece desde o início a estrutura dos softwares
+                que ela própria criou, então cada nova evolução parte de uma
+                base organizada e conhecida, em vez de reconstruir o contexto
+                técnico do zero.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-19" aria-labelledby="title-19">
+            <header class="section-heading">
+              <span>16</span>
+              <h3 id="title-19">Documentação viva</h3>
+              <a
+                class="anchor"
+                href="#sec-19"
+                aria-label="Link para Documentação viva"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Documentação não é tratada apenas como um README escrito no
+                final.
+              </p>
+              <p>Ela pode acompanhar o nível de complexidade do projeto.</p>
+              <p>
+                Uma aplicação pequena não precisa receber dezenas de documentos
+                sem utilidade. Um sistema empresarial maior pode justificar
+                documentação muito mais completa.
+              </p>
+              <p>
+                Dependendo da necessidade, a plataforma pode produzir e manter
+                artefatos como requisitos funcionais e não funcionais,
+                restrições, regras de negócio, histórias de usuário, casos de
+                uso, critérios de aceitação, casos de teste, documentação de
+                APIs, decisões de arquitetura e diagramas.
+              </p>
+              <p>
+                Também podem fazer parte desse conjunto diagramas de classes,
+                estados, sequência, componentes, implantação, fluxo, banco de
+                dados e outras representações úteis da engenharia de software.
+              </p>
+              <p>Isso cria dois benefícios ao mesmo tempo.</p>
+              <p>
+                O primeiro é humano: uma nova pessoa consegue compreender o
+                projeto com muito mais facilidade.
+              </p>
+              <p>
+                O segundo é diretamente ligado à IA: essa documentação se
+                transforma em
+                <strong>memória estruturada para futuros agentes</strong>.
+              </p>
+              <p>Então existe um ciclo importante:</p>
+              <ol class="steps">
+                <li>Software é desenvolvido</li>
+                <li>Conhecimento é documentado</li>
+                <li>Documentação vira memória</li>
+                <li>Novos agentes reutilizam essa memória</li>
+                <li>Software continua evoluindo</li>
+              </ol>
+
+              <p>
+                Quanto maior o sistema, mais valioso isso tende a se tornar.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-20" aria-labelledby="title-20">
+            <header class="section-heading">
+              <span>17</span>
+              <h3 id="title-20">Conhecimento acumulado</h3>
+              <a
+                class="anchor"
+                href="#sec-20"
+                aria-label="Link para Conhecimento acumulado"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Um projeto desorganizado costuma ficar progressivamente mais
+                caro.
+              </p>
+              <p>
+                Depois de algum tempo, antes de alterar uma pequena
+                funcionalidade, alguém precisa descobrir onde ela está, como
+                funciona, quais outras partes dependem dela, quais decisões
+                anteriores foram tomadas e o que pode quebrar.
+              </p>
+              <p>
+                A plataforma tenta fazer com que
+                <strong
+                  >cada ciclo de desenvolvimento deixe o próximo ciclo mais bem
+                  informado</strong
+                >.
+              </p>
+              <p>
+                Quando a Farmácia Lima adiciona controle de lotes, por exemplo,
+                não fica apenas o código dessa funcionalidade.
+              </p>
+              <p>
+                Também podem ficar seus testes, documentação, histórico Git,
+                decisões, contratos e relações com outras partes do sistema.
+              </p>
+              <p>Quando meses depois surge:</p>
+              <blockquote>
+                <p>“Agora quero bloquear a venda de um medicamento vencido.”</p>
+              </blockquote>
+              <p>
+                a plataforma já possui muito mais informação organizada sobre
+                produtos, lotes, validade, estoque e integração com vendas.
+              </p>
+              <p>
+                Ela não precisa redescobrir tudo da mesma forma que teria de
+                fazer na primeira implementação.
+              </p>
+              <p>
+                É nesse sentido que existe uma espécie de
+                <strong>capitalização do conhecimento do projeto</strong>: o
+                trabalho feito anteriormente não produz apenas funcionalidades;
+                ele também melhora a base de informação utilizada para construir
+                as próximas.
+              </p>
+            </div>
+          </section>
+        </div>
+        <div class="chapter" id="chapter-4">
+          <div class="chapter-label">
+            <span>PARTE 05</span>
+            <h2>Segurança e controle</h2>
+            <p>Escopos, permissões e integridade</p>
+          </div>
+          <section class="doc-section" id="sec-13" aria-labelledby="title-13">
+            <header class="section-heading">
+              <span>18</span>
+              <h3 id="title-13">Limites de atuação da IA</h3>
+              <a
+                class="anchor"
+                href="#sec-13"
+                aria-label="Link para Limites de atuação da IA"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Uma IA capaz de programar também é capaz de executar comandos e
+                alterar arquivos.
+              </p>
+              <p>
+                Por isso uma arquitetura segura não pode simplesmente entregar o
+                computador inteiro para cada agente.
+              </p>
+              <p>
+                A plataforma controla <strong>onde cada IA pode atuar</strong>.
+              </p>
+              <p>Se o agente está trabalhando no:</p>
+              <div class="scope">
+                Farmácia Lima <span>/</span>
+                <strong>Controle de Estoque</strong>
+              </div>
+
+              <p>ele não recebe automaticamente permissão para alterar:</p>
+              <div class="scope">
+                Farmácia Lima <span>/</span> <strong>Sistema Financeiro</strong>
+              </div>
+
+              <p>muito menos arquivos aleatórios do computador.</p>
+              <p>
+                Existem áreas autorizadas para leitura e áreas autorizadas para
+                escrita, além de mecanismos de isolamento do ambiente em que os
+                agentes executam.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-14" aria-labelledby="title-14">
+            <header class="section-heading">
+              <span>19</span>
+              <h3 id="title-14">Responsabilidades na aplicação</h3>
+              <a
+                class="anchor"
+                href="#sec-14"
+                aria-label="Link para Responsabilidades na aplicação"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Segurança e organização não existem apenas entre componentes.
+              </p>
+              <p>
+                Dentro de uma mesma Aplicação, o trabalho também pode ser
+                dividido conforme a responsabilidade atual.
+              </p>
+              <p>Por exemplo, no Controle de Estoque:</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Responsabilidade</th>
+                      <th scope="col">Escopo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Backend</td>
+                      <td>regras de estoque e APIs</td>
+                    </tr>
+                    <tr>
+                      <td>Frontend</td>
+                      <td>interface utilizada pelos funcionários</td>
+                    </tr>
+                    <tr>
+                      <td>Persistência</td>
+                      <td>banco e migrações</td>
+                    </tr>
+                    <tr>
+                      <td>Testes</td>
+                      <td>verificação das funcionalidades</td>
+                    </tr>
+                    <tr>
+                      <td>QA / validação</td>
+                      <td>confirmação independente do resultado</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>
+                Isso não significa que cinco agentes ficam simultaneamente
+                alterando o projeto.
+              </p>
+              <p>
+                Eles podem receber contextos diferentes em momentos diferentes,
+                cada um limitado à responsabilidade necessária para aquela
+                etapa.
+              </p>
+              <p>
+                Um agente responsável por uma implementação não precisa possuir
+                a mesma visão ou as mesmas responsabilidades de quem está
+                validando o resultado.
+              </p>
+              <p>
+                Essa separação reduz interferência entre tarefas e ajuda a
+                manter o desenvolvimento previsível.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-15" aria-labelledby="title-15">
+            <header class="section-heading">
+              <span>20</span>
+              <h3 id="title-15">Compartilhamento entre aplicações</h3>
+              <a
+                class="anchor"
+                href="#sec-15"
+                aria-label="Link para Compartilhamento entre aplicações"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Ao mesmo tempo, aplicações diferentes precisam conseguir
+                compartilhar conhecimento.
+              </p>
+              <p>
+                A Farmácia Lima pode possuir informações ou contratos que
+                Estoque, Balcão e Aplicativo precisam conhecer.
+              </p>
+              <p>
+                A plataforma pode manter uma área compartilhada de contexto
+                autorizado.
+              </p>
+              <p>A ideia é simples:</p>
+              <blockquote>
+                <p>
+                  <strong
+                    >compartilhar informação não significa compartilhar
+                    permissão de alteração.</strong
+                  >
+                </p>
+              </blockquote>
+              <p>
+                O Controle de Estoque pode consultar um contrato utilizado pelo
+                Sistema de Balcão sem ganhar automaticamente autorização para
+                editar o código do Balcão.
+              </p>
+              <p>
+                Essa diferença é especialmente importante conforme os
+                ecossistemas ficam maiores.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-16" aria-labelledby="title-16">
+            <header class="section-heading">
+              <span>21</span>
+              <h3 id="title-16">Segurança como requisito</h3>
+              <a
+                class="anchor"
+                href="#sec-16"
+                aria-label="Link para Segurança como requisito"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>O controle da IA é apenas uma parte da segurança.</p>
+              <p>
+                A própria engenharia das aplicações também pode incorporar as
+                práticas exigidas por sistemas que trabalham com informações
+                importantes ou sensíveis.
+              </p>
+              <p>
+                Dependendo do produto, isso pode envolver autenticação,
+                autorização por perfil, auditoria, criptografia, segregação de
+                dados, gestão de segredos, logs, validações e princípios de
+                menor privilégio.
+              </p>
+              <p>
+                Uma clínica, por exemplo, pode demandar cuidados diferentes de
+                um site institucional.
+              </p>
+              <p>
+                Um sistema financeiro pode exigir controles diferentes de uma
+                página de divulgação.
+              </p>
+              <p>
+                A plataforma consegue tratar segurança como parte dos requisitos
+                do projeto, e não como uma preocupação adicionada apenas depois
+                que o código já foi criado.
+              </p>
+              <p>
+                Da mesma forma, a plataforma é destinada à construção de
+                software legítimo e produtivo; capacidades prejudiciais ou
+                destinadas a comprometer sistemas não fazem parte de sua
+                finalidade.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-17" aria-labelledby="title-17">
+            <header class="section-heading">
+              <span>22</span>
+              <h3 id="title-17">Integridade do projeto</h3>
+              <a
+                class="anchor"
+                href="#sec-17"
+                aria-label="Link para Integridade do projeto"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>Existe outra proteção importante.</p>
+              <p>
+                A plataforma não olha para qualquer pasta aleatória encontrada
+                no computador e simplesmente assume:
+              </p>
+              <blockquote>
+                <p>“Eu conheço este projeto.”</p>
+              </blockquote>
+              <p>
+                O conhecimento utilizado para evolução e recuperação está ligado
+                às aplicações que foram construídas e acompanhadas pelo próprio
+                ambiente.
+              </p>
+              <p>
+                Se alguém modifica esses arquivos externamente, a plataforma
+                pode comparar o estado esperado com o estado atual.
+              </p>
+              <p>
+                Ela consegue verificar elementos como Git, arquivos, branch e
+                fingerprints do conteúdo.
+              </p>
+              <p>
+                Se alguma coisa não corresponde ao que deveria existir, ela não
+                continua silenciosamente fingindo que nada aconteceu.
+              </p>
+              <p>
+                Isso evita utilizar memória antiga sobre uma versão do software
+                que já foi modificada por fora.
+              </p>
+            </div>
+          </section>
+        </div>
+        <div class="chapter" id="chapter-5">
+          <div class="chapter-label">
+            <span>PARTE 06</span>
+            <h2>Operação e autonomia</h2>
+            <p>Do projeto ao software em uso</p>
+          </div>
+          <section class="doc-section" id="sec-22" aria-labelledby="title-22">
+            <header class="section-heading">
+              <span>23</span>
+              <h3 id="title-22">Execução, publicação e operação</h3>
+              <a
+                class="anchor"
+                href="#sec-22"
+                aria-label="Link para Execução, publicação e operação"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Criar os arquivos é apenas uma parte do ciclo de vida de uma
+                aplicação.
+              </p>
+              <p>
+                A plataforma também mantém conhecimento sobre como aquele
+                software funciona: como é construído, como é testado, quais
+                serviços utiliza, que configurações exige, quais bancos precisa,
+                quais portas usa e quais versões estão sendo lançadas.
+              </p>
+              <p>
+                Isso permite integrar ao mesmo processo tarefas como build,
+                empacotamento, Docker, configuração de ambiente, banco de dados,
+                migrações, health checks, logs, release e deploy.
+              </p>
+              <p>
+                Por exemplo, uma aplicação web pode ser publicada em serviços
+                como AWS, Azure, Google Cloud, Cloudflare, Vercel, Netlify,
+                Render, Railway ou um servidor próprio, de acordo com sua
+                arquitetura.
+              </p>
+              <p>
+                Um backend pode ser empacotado em containers e executado em VPS,
+                Docker ou Kubernetes.
+              </p>
+              <p>
+                Um aplicativo mobile pode passar por build, versionamento,
+                assinatura e preparação para distribuição na Google Play ou App
+                Store.
+              </p>
+              <p>
+                Uma aplicação desktop pode gerar builds e instaladores para
+                Windows, Linux ou macOS.
+              </p>
+              <p>
+                E como essas informações fazem parte do conhecimento estruturado
+                da aplicação, publicar uma nova versão não precisa significar
+                redescobrir todo o processo de lançamento.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-23" aria-labelledby="title-23">
+            <header class="section-heading">
+              <span>24</span>
+              <h3 id="title-23">Acesso e organização dos projetos</h3>
+              <a
+                class="anchor"
+                href="#sec-23"
+                aria-label="Link para Acesso e organização dos projetos"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Quando existem dezenas de projetos, encontrar uma pasta também
+                vira um problema de organização.
+              </p>
+              <p>
+                A plataforma mantém a estrutura dos Ecossistemas e Aplicações
+                que administra.
+              </p>
+              <p>Então a pessoa não precisa lembrar:</p>
+              <blockquote>
+                <p>“Onde mesmo ficou o backend daquele projeto?”</p>
+              </blockquote>
+              <p>
+                Ela trabalha a partir de algo conceitualmente muito mais próximo
+                de:
+              </p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Ecossistema</th>
+                      <th scope="col">Aplicações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Farmácia Lima</td>
+                      <td>
+                        Controle de Estoque · Sistema de Balcão · Aplicativo
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Clínica Oliveira</td>
+                      <td>Agendamento · Portal do Paciente</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p>
+                Selecionar uma Aplicação permite continuar o trabalho a partir
+                do contexto que já pertence a ela.
+              </p>
+              <p>
+                A interação pode acontecer diretamente pelo terminal, que
+                oferece uma forma simples e eficiente de controlar a plataforma,
+                e o mesmo núcleo pode ser apresentado através de interfaces mais
+                ricas, como um painel web.
+              </p>
+              <p>
+                Nesse painel podem aparecer Ecossistemas, Aplicações, progresso,
+                documentação, versões, releases, deployments e estado dos
+                serviços, sem exigir que o usuário veja a mecânica interna
+                utilizada para produzir tudo isso.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-24" aria-labelledby="title-24">
+            <header class="section-heading">
+              <span>25</span>
+              <h3 id="title-24">Liberdade de tecnologia</h3>
+              <a
+                class="anchor"
+                href="#sec-24"
+                aria-label="Link para Liberdade de tecnologia"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Ecossistema e Aplicação são conceitos de produto, não de
+                tecnologia.
+              </p>
+              <p>Isso permite utilizar a engenharia adequada para cada caso.</p>
+              <p>
+                Uma aplicação web pode utilizar React, TypeScript, Vue, Angular
+                ou Next.js na interface e Java com Spring Boot, C#/.NET,
+                Node.js, Python, Go ou outras tecnologias no backend.
+              </p>
+              <p>
+                Aplicativos móveis podem utilizar Kotlin para Android, Swift
+                para iOS, Flutter/Dart ou React Native.
+              </p>
+              <p>
+                Aplicações desktop podem utilizar .NET, Java, Electron, Tauri,
+                Qt ou tecnologias nativas.
+              </p>
+              <p>
+                APIs e serviços podem utilizar Java, Go, Rust, Python, Node.js
+                ou C#.
+              </p>
+              <p>
+                Também entram nesse modelo ferramentas de linha de comando,
+                automações, sistemas corporativos, ERPs, CRMs, sistemas
+                financeiros, estoque, RH, logística, dashboards, processamento
+                de dados, integrações, serviços internos, IoT e software
+                embarcado quando o ambiente de execução exigir esse tipo de
+                solução.
+              </p>
+              <p>O princípio é simples:</p>
+              <blockquote>
+                <p>
+                  <strong
+                    >a necessidade determina a engenharia; a engenharia não
+                    força a necessidade a caber em uma única tecnologia.</strong
+                  >
+                </p>
+              </blockquote>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-25" aria-labelledby="title-25">
+            <header class="section-heading">
+              <span>26</span>
+              <h3 id="title-25">Software convencional e autonomia</h3>
+              <a
+                class="anchor"
+                href="#sec-25"
+                aria-label="Link para Software convencional e autonomia"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>
+                Apesar da automação, o objetivo não é gerar softwares que só
+                funcionem dentro da própria plataforma.
+              </p>
+              <p>
+                Os projetos seguem estruturas, tecnologias e ferramentas
+                reconhecidas pelo mercado.
+              </p>
+              <p>Git continua sendo Git.</p>
+              <p>React continua sendo React.</p>
+              <p>Spring Boot continua sendo Spring Boot.</p>
+              <p>PostgreSQL continua sendo PostgreSQL.</p>
+              <p>Docker continua sendo Docker.</p>
+              <p>
+                Os testes continuam utilizando ferramentas comuns das
+                respectivas tecnologias.
+              </p>
+              <p>
+                A documentação continua podendo ser lida por uma equipe humana.
+              </p>
+              <p>Isso é importante porque reduz aprisionamento.</p>
+              <p>
+                A plataforma adiciona uma camada de inteligência e organização
+                ao processo, mas o produto gerado continua sendo software
+                convencional.
+              </p>
+              <p>
+                Uma equipe pode abrir o repositório, entender sua estrutura,
+                executar os testes e trabalhar com as tecnologias que já
+                conhece.
+              </p>
+            </div>
+          </section>
+          <section class="doc-section" id="sec-26" aria-labelledby="title-26">
+            <header class="section-heading">
+              <span>27</span>
+              <h3 id="title-26">A proposta em perspectiva</h3>
+              <a
+                class="anchor"
+                href="#sec-26"
+                aria-label="Link para A proposta em perspectiva"
+                >#</a
+              >
+            </header>
+            <div class="prose">
+              <p>Tudo isso volta à ideia inicial.</p>
+              <p>O problema que a plataforma procura resolver não é:</p>
+              <blockquote>
+                <p>“Como faço uma IA escrever mais código?”</p>
+              </blockquote>
+              <p>É:</p>
+              <blockquote>
+                <p>
+                  <strong
+                    >“Como transformar a capacidade de programar das IAs em um
+                    processo confiável para construir e manter produtos de
+                    software reais?”</strong
+                  >
+                </p>
+              </blockquote>
+              <p>
+                Por isso o produto reúne várias preocupações que normalmente
+                aparecem separadas: entendimento de negócio, arquitetura,
+                agentes de IA, controle de contexto, segurança, Git, testes,
+                documentação, integração, recuperação, evolução, execução e
+                publicação.
+              </p>
+              <p>A pessoa pode começar com:</p>
+              <blockquote>
+                <p>“Preciso controlar o estoque da minha farmácia.”</p>
+              </blockquote>
+              <p>e aquele pedido pode se tornar uma Aplicação completa.</p>
+              <p>Depois essa Aplicação pode crescer.</p>
+              <p>Outras Aplicações podem nascer.</p>
+              <p>Elas podem conversar.</p>
+              <p>O Ecossistema pode aumentar.</p>
+              <p>
+                Novas tecnologias podem ser introduzidas quando forem
+                necessárias.
+              </p>
+              <p>
+                E o conhecimento acumulado durante todo esse processo continua
+                disponível para as próximas evoluções.
+              </p>
+              <p>A proposta, no fim, é bastante direta:</p>
+              <blockquote>
+                <p>
+                  <strong
+                    >transformar uma necessidade de negócio em software
+                    organizado, seguro, testado, documentado, versionado,
+                    integrável, publicável e continuamente evolutivo —
+                    utilizando IA como força de desenvolvimento, mas mantendo a
+                    engenharia de software no controle do processo.</strong
+                  >
+                </p>
+              </blockquote>
+            </div>
+          </section>
+        </div>
+        <footer>
+          <span>Engenharia com IA · Visão de produto</span
+          ><a href="#inicio">Voltar ao início ↑</a>
+        </footer>
+      </main>
+    </div>
+    <script>
+      (() => {
+        const root = document.documentElement,
+          theme = document.getElementById("theme"),
+          sidebar = document.getElementById("sidebar"),
+          menu = document.getElementById("menu");
+        function setTheme(value) {
+          root.dataset.theme = value;
+          theme.textContent = value === "dark" ? "Tema claro" : "Tema escuro";
+          theme.setAttribute(
+            "aria-label",
+            "Ativar " + theme.textContent.toLowerCase(),
+          );
+        }
+        try {
+          setTheme(localStorage.getItem("doc-theme") || "light");
+        } catch {
+          setTheme("light");
+        }
+        theme.addEventListener("click", () => {
+          const v = root.dataset.theme === "dark" ? "light" : "dark";
+          setTheme(v);
+          try {
+            localStorage.setItem("doc-theme", v);
+          } catch {}
+        });
+        document
+          .getElementById("print")
+          .addEventListener("click", () => window.print());
+        function closeMenu() {
+          sidebar.classList.remove("open");
+          menu.setAttribute("aria-expanded", "false");
+        }
+        menu.addEventListener("click", () => {
+          const open = sidebar.classList.toggle("open");
+          menu.setAttribute("aria-expanded", String(open));
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeMenu();
+        });
+        document.addEventListener("click", (e) => {
+          if (!sidebar.contains(e.target) && !menu.contains(e.target))
+            closeMenu();
+        });
+        const links = [...document.querySelectorAll("nav a")],
+          sections = [...document.querySelectorAll(".doc-section")];
+        links.forEach((a) => a.addEventListener("click", closeMenu));
+        let scheduled = false;
+        function update() {
+          scheduled = false;
+          const max = root.scrollHeight - innerHeight;
+          document.getElementById("progress").style.width =
+            (max > 0 ? Math.min(100, (100 * scrollY) / max) : 0) + "%";
+          let current = sections[0];
+          for (const s of sections) {
+            if (s.getBoundingClientRect().top <= 150) current = s;
+            else break;
+          }
+          links.forEach((a) => {
+            const on = a.hash === "#" + current.id;
+            a.classList.toggle("active", on);
+            if (on) a.setAttribute("aria-current", "location");
+            else a.removeAttribute("aria-current");
+          });
+        }
+        addEventListener(
+          "scroll",
+          () => {
+            if (!scheduled) {
+              scheduled = true;
+              requestAnimationFrame(update);
+            }
+          },
+          { passive: true },
+        );
+        addEventListener("resize", update);
+        update();
+        const search = document.getElementById("search"),
+          status = document.getElementById("status");
+        const normalize = (s) =>
+          s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+        const texts = new Map(
+          sections.map((s) => ["#" + s.id, normalize(s.textContent)]),
+        );
+        function find() {
+          const query = normalize(search.value.trim());
+          let count = 0;
+          links.forEach((a) => {
+            const match = !!query && texts.get(a.hash).includes(query);
+            a.classList.toggle("match", match);
+            a.classList.toggle("dim", !!query && !match);
+            if (match) count++;
+          });
+          status.textContent = query
+            ? count
+              ? count + " seção(ões) encontrada(s). Clique nos destaques."
+              : "Nenhuma seção encontrada."
+            : "Use o sumário para explorar os temas.";
+        }
+        search.addEventListener("input", find);
+        search.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            const a = links.find((x) => x.classList.contains("match"));
+            if (a) {
+              a.click();
+              search.blur();
+            }
+          }
+        });
+        document.getElementById("clear").addEventListener("click", () => {
+          search.value = "";
+          find();
+          search.focus();
+        });
+      })();
+    </script>
+  </body>
+</html>
