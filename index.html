@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -884,8 +884,7 @@
       <a class="brand" href="#inicio"
         ><span class="brand-mark" aria-hidden="true">/e</span
         ><span
-          ><strong>Engenharia com IA</strong
-          ><small>Documentação de produto</small></span
+          ><strong>Engenharia com IA</strong><small>Documentação de produto</small></span
         ></a
       >
       <div class="actions">
@@ -896,8 +895,8 @@
           aria-expanded="false"
         >
           Sumário</button
-        ><button class="btn" id="theme" aria-label="Ativar tema escuro">
-          Tema escuro</button
+        ><button class="btn" id="theme" aria-label="Ativar tema claro">
+          Tema claro</button
         ><button class="btn primary" id="print">
           PDF<span class="print-text"> / Imprimir</span>
         </button>
@@ -989,14 +988,11 @@
           </p>
           <div class="overview">
             <a href="#chapter-0"
-              ><span>01</span><strong>Entender e organizar</strong
-              ><small>Negócio, ecossistemas e aplicações.</small></a
+              ><span>01</span><strong>Entender e organizar</strong><small>Negócio, ecossistemas e aplicações.</small></a
             ><a href="#chapter-2"
-              ><span>02</span><strong>Construir e validar</strong
-              ><small>Agentes, testes e versionamento.</small></a
+              ><span>02</span><strong>Construir e validar</strong><small>Agentes, testes e versionamento.</small></a
             ><a href="#chapter-5"
-              ><span>03</span><strong>Operar e evoluir</strong
-              ><small>Publicação e continuidade.</small></a
+              ><span>03</span><strong>Operar e evoluir</strong><small>Publicação e continuidade.</small></a
             >
           </div>
         </div>
@@ -1126,7 +1122,7 @@
                 desenvolvimento.
               </p>
               <p>
-                Isso não significa que cada tecnologia utilizada vira um
+                Issso não significa que cada tecnologia utilizada vira um
                 <strong>componente</strong> diferente.
               </p>
               <p>
@@ -1171,7 +1167,7 @@
                 diferentes.
               </p>
               <p>
-                Isso traz uma vantagem importante: a plataforma consegue manter
+                Issso traz uma vantagem importante: a plataforma consegue manter
                 cada produto independente sem perder o contexto de que todos
                 pertencem ao mesmo negócio.
               </p>
@@ -2092,16 +2088,16 @@
                 <div class="diagram-title">Farmácia Lima</div>
                 <ul class="tiles">
                   <li>
-                    <strong>Controle de Estoque</strong
-                    ><span>Evolui continuamente</span>
+                    <strong>Controle de Estoque</strong>
+                    <span>Evolui continuamente</span>
                   </li>
                   <li>
-                    <strong>Sistema de Balcão</strong
-                    ><span>Evolui continuamente</span>
+                    <strong>Sistema de Balcão</strong>
+                    <span>Evolui continuamente</span>
                   </li>
                   <li>
-                    <strong>Aplicativo do Cliente</strong
-                    ><span>Evolui continuamente</span>
+                    <strong>Aplicativo do Cliente</strong>
+                    <span>Evolui continuamente</span>
                   </li>
                 </ul>
               </div>
@@ -2710,7 +2706,7 @@
               </p>
               <p>
                 Uma equipe pode abrir o repositório, entender sua estrutura,
-                executar os testes e trabalhar com as tecnologias que já
+                executar os testes e trabalhar com das tecnologias que já
                 conhece.
               </p>
             </div>
@@ -2802,9 +2798,9 @@
           );
         }
         try {
-          setTheme(localStorage.getItem("doc-theme") || "light");
+          setTheme(localStorage.getItem("doc-theme") || "dark");
         } catch {
-          setTheme("light");
+          setTheme("dark");
         }
         theme.addEventListener("click", () => {
           const v = root.dataset.theme === "dark" ? "light" : "dark";
